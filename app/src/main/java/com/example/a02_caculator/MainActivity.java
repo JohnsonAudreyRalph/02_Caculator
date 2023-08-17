@@ -70,55 +70,55 @@ public class MainActivity extends AppCompatActivity {
             String calculation = txt_Show.getText().toString(); // Lấy chuỗi giá trị phép tính từ txt_Show rồi đưa vào calculation
 
 
-            int openBracketIndex = calculation.lastIndexOf("(");
-            while (openBracketIndex != -1){
-                int closeBracketIndex = calculation.indexOf(")", openBracketIndex);
-                if (closeBracketIndex != -1){
-                    String innerExpression = calculation.substring(openBracketIndex + 1, closeBracketIndex);
-                    String[] innerParts = innerExpression.split("[+\\-x:]");
-                    List<String> innerNumbers = new ArrayList<>(Arrays.asList(innerParts));
-                    List<String> innerOperators = new ArrayList<>();
-
-                    for (char c : innerExpression.toCharArray()) {
-                        if (c == '+' || c == '-' || c == 'x' || c == ':') {
-                            innerOperators.add(String.valueOf(c));
-                        }
-                    }
-                    for (int i = 0; i < innerOperators.size(); i++){
-                        String operator = innerOperators.get(i);
-                        if (operator.equals("x") || operator.equals(":")){
-                            double num1 = Double.parseDouble(innerNumbers.get(i));
-                            double num2 = Double.parseDouble(innerNumbers.get(i + 1));
-                            double result;
-                            if (operator.equals("x")) {
-                                result = num1 * num2;
-                            } else {
-                                result = num1 / num2;
-                            }
-                            innerNumbers.set(i, String.valueOf(result));
-                            innerNumbers.remove(i + 1);
-                            innerOperators.remove(i);
-                            i--;
-                        }
-                    }
-                    double innerResult = Double.parseDouble(innerNumbers.get(0));
-                    for (int i = 0; i < innerOperators.size(); i++) {
-                        String operator = innerOperators.get(i);
-                        double nextNumber = Double.parseDouble(innerNumbers.get(i + 1));
-
-                        switch (operator) {
-                            case "+":
-                                innerResult += nextNumber;
-                                break;
-                            case "-":
-                                innerResult -= nextNumber;
-                                break;
-                        }
-                    }
-                    calculation = calculation.substring(0, openBracketIndex) + innerResult + calculation.substring(closeBracketIndex + 1);
-                }
-                openBracketIndex = calculation.lastIndexOf("(");
-            }
+//            int openBracketIndex = calculation.lastIndexOf("(");
+//            while (openBracketIndex != -1){
+//                int closeBracketIndex = calculation.indexOf(")", openBracketIndex);
+//                if (closeBracketIndex != -1){
+//                    String innerExpression = calculation.substring(openBracketIndex + 1, closeBracketIndex);
+//                    String[] innerParts = innerExpression.split("[+\\-x:]");
+//                    List<String> innerNumbers = new ArrayList<>(Arrays.asList(innerParts));
+//                    List<String> innerOperators = new ArrayList<>();
+//
+//                    for (char c : innerExpression.toCharArray()) {
+//                        if (c == '+' || c == '-' || c == 'x' || c == ':') {
+//                            innerOperators.add(String.valueOf(c));
+//                        }
+//                    }
+//                    for (int i = 0; i < innerOperators.size(); i++){
+//                        String operator = innerOperators.get(i);
+//                        if (operator.equals("x") || operator.equals(":")){
+//                            double num1 = Double.parseDouble(innerNumbers.get(i));
+//                            double num2 = Double.parseDouble(innerNumbers.get(i + 1));
+//                            double result;
+//                            if (operator.equals("x")) {
+//                                result = num1 * num2;
+//                            } else {
+//                                result = num1 / num2;
+//                            }
+//                            innerNumbers.set(i, String.valueOf(result));
+//                            innerNumbers.remove(i + 1);
+//                            innerOperators.remove(i);
+//                            i--;
+//                        }
+//                    }
+//                    double innerResult = Double.parseDouble(innerNumbers.get(0));
+//                    for (int i = 0; i < innerOperators.size(); i++) {
+//                        String operator = innerOperators.get(i);
+//                        double nextNumber = Double.parseDouble(innerNumbers.get(i + 1));
+//
+//                        switch (operator) {
+//                            case "+":
+//                                innerResult += nextNumber;
+//                                break;
+//                            case "-":
+//                                innerResult -= nextNumber;
+//                                break;
+//                        }
+//                    }
+//                    calculation = calculation.substring(0, openBracketIndex) + innerResult + calculation.substring(closeBracketIndex + 1);
+//                }
+//                openBracketIndex = calculation.lastIndexOf("(");
+//            }
 
             String[] parts = calculation.split("[+\\-x:]"); // Tách theo phép tính
             List<String> numbers = new ArrayList<>(Arrays.asList(parts)); // Tạo ra một danh sách chứa các số
